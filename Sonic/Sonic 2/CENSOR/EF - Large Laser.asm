@@ -1,58 +1,57 @@
-SndE7_Header:
+SFXEF_Header:
 	smpsHeaderStartSong 2
-	smpsHeaderVoice     SndE7_Voices
+	smpsHeaderVoice     SFXEF_Voices
 	smpsHeaderTempoSFX  $01
-	smpsHeaderChanSFX   $02
+	smpsHeaderChanSFX   $03
 
-	smpsHeaderSFXChannel cFM5, SndE7_FM5,	$36, $00
-	smpsHeaderSFXChannel cPSG3, SndE7_PSG3,	$00, $00
+	smpsHeaderSFXChannel cFM5, SFXEF_FM5,	$00, $0B
+	smpsHeaderSFXChannel cFM4, SFXEF_FM4,	$00, $12
+	smpsHeaderSFXChannel cPSG3, SFXEF_PSG3,	$00, $00
+
+; FM4 Data
+SFXEF_FM4:
+	smpsAlterNote       $02
+	dc.b	nRst, $02
 
 ; FM5 Data
-SndE7_FM5:
+SFXEF_FM5:
 	smpsSetvoice        $00
-	smpsModSet          $0A, $01, $F0, $31
-
-SndE7_Loop00:
-	dc.b	nE4, $04, smpsNoAttack
-	smpsAlterVol        $04
-	smpsLoop            $00, $09, SndE7_Loop00
+	smpsAlterVol        $0C
+	dc.b	nBb7, $06, smpsNoAttack
+	smpsAlterVol        $F4
+	dc.b	$06, smpsNoAttack
+	smpsAlterVol        $F4
+	dc.b	$12
 	smpsStop
 
 ; PSG3 Data
-SndE7_PSG3:
+SFXEF_PSG3:
 	smpsPSGform         $E7
-	smpsPSGvoice        $00
-	dc.b	nBb5, $04, nMaxPSG, $04
+	dc.b	nMaxPSG, $04, nEb5, nA4, nEb4, nA3
 	smpsAlterVol        $01
-	dc.b	nAb5, $04
+	dc.b	nA3
 	smpsAlterVol        $01
-	dc.b	nG5, $04
+	dc.b	nA3
 	smpsAlterVol        $01
-	dc.b	nFs5, $04
-	smpsAlterVol        $01
-	dc.b	nF5, $04
-	smpsAlterVol        $01
-	dc.b	nE5, $04
-	smpsAlterVol        $01
-	dc.b	nEb5, $08
+	dc.b	nA3
 	smpsStop
 
-SndE7_Voices:
+SFXEF_Voices:
 ;	Voice $00
-;	$33
-;	$00, $00, $10, $31, 	$1F, $1E, $1D, $18, 	$00, $1D, $0C, $00
-;	$00, $01, $00, $00, 	$0F, $0F, $0F, $0F, 	$08, $07, $06, $80
-	smpsVcAlgorithm     $03
-	smpsVcFeedback      $06
+;	$3D
+;	$09, $34, $34, $28, 	$1F, $16, $16, $16, 	$00, $00, $00, $04
+;	$00, $00, $00, $00, 	$0F, $0F, $0F, $0F, 	$15, $02, $02, $00
+	smpsVcAlgorithm     $05
+	smpsVcFeedback      $07
 	smpsVcUnusedBits    $00
-	smpsVcDetune        $03, $01, $00, $00
-	smpsVcCoarseFreq    $01, $00, $00, $00
+	smpsVcDetune        $02, $03, $03, $00
+	smpsVcCoarseFreq    $08, $04, $04, $09
 	smpsVcRateScale     $00, $00, $00, $00
-	smpsVcAttackRate    $18, $1D, $1E, $1F
+	smpsVcAttackRate    $16, $16, $16, $1F
 	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $00, $0C, $1D, $00
-	smpsVcDecayRate2    $00, $00, $01, $00
+	smpsVcDecayRate1    $04, $00, $00, $00
+	smpsVcDecayRate2    $00, $00, $00, $00
 	smpsVcDecayLevel    $00, $00, $00, $00
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $00, $06, $07, $08
+	smpsVcTotalLevel    $00, $02, $02, $15
 
